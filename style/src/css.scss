@@ -1,0 +1,251 @@
+@import "compass";
+
+
+/* Progress Bar */
+
+body {
+	background: #353433;
+	color: #e9e8e7;
+}
+
+body, input {
+	font: 17px Helvetica, sans-serif;
+}
+
+.progress-bar-container {
+
+	border: 1px solid #454443;
+	background: #090807;
+	padding: 1px;
+	width: 300px;
+	position: absolute;
+	top: 200px;
+	left: 50%;
+	margin-left: -151px;
+	z-index: 50;
+
+	.progress-bar {
+		background: #8b8685;
+		height: 18px;
+		width: 0%;
+		-moz-transition: 8s width ease-out;
+		-webkit-transition: 8s width ease-out;
+		-ms-transition: 8s width ease-out;
+		-o-transition: 8s width ease-out;
+		transition: 8s width ease-out;
+	}
+
+}
+
+html, body, #main, .viewport {
+	height: 100%;
+	margin: 0; padding: 0;
+}
+
+.viewport {
+	border-spacing: 0;
+	table-layout: fixed;
+	width: 100%;
+	.column {
+		margin: 0;
+		padding: 0;
+		width: 33%;
+		border-left: 1px solid #090807;
+		&:first-child {
+			border-left: 0;
+		}
+		.column-content {
+			position: relative;
+			overflow: hidden;
+		}
+	}
+}
+
+.panel {
+	background: #353433;
+	height: 100%;
+	.panel-content {
+		&, .panel-clip, .panel-view {
+			height: 100%;
+		}
+	}
+	.panel-clip {
+		overflow: hidden;
+		position: relative;
+	}
+	.panel-view {
+		position: relative;
+		display: inline;
+		white-space: nowrap;
+		-webkit-transform: translate3d(0,0,0);
+		-webkit-transition: 0.3s -webkit-transform, 0.3s left;
+		-moz-transition: 0.3s left;
+	}
+	.sub-panel {
+		width: 100%; height: 100%;
+		display: inline-block;
+		vertical-align: top;
+		white-space: normal;
+		position: relative;
+	}
+}
+
+h1 {
+	background: #375893;
+	height: 48px;
+	@include box-sizing(border-box);
+	line-height: 48px;
+	font-size: 1.3em;
+	font-weight: bold;
+	text-align: center;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+	border-bottom: 1px solid #0D111A;
+	-webkit-transform: translate3d(0,0,0);
+}
+
+.listbox {
+	overflow-x: hidden;
+	overflow-y: auto;
+	position: absolute;
+	top: 48px;
+	left: 0; right: 0; bottom: 0;
+	&, .listbox-content {
+		background: #353433;
+	}
+}
+
+.listbox-content {
+	position: relative;
+	-webkit-transform: translate3d(0,0,0);
+}
+
+.listitem {
+	border-bottom: 1px solid #454443;
+	&.selected, &.tapping {
+		background: #8b8685;
+		color: #000;
+	}
+}
+
+@mixin radius-declaration($v, $h, $value) {
+	@include experimental(border-radius-#{$v}-#{$h}, $value, not -moz);
+	-moz-border-radius-#{$v}#{$h}: $value;
+}
+
+@mixin radius($tl, $tr, $br, $bl) {
+	@include radius-declaration(top, left, $tl);
+	@include radius-declaration(top, right, $tr);
+	@include radius-declaration(bottom, right, $br);
+	@include radius-declaration(bottom, left, $bl);
+}
+
+.songitem {
+	height: 48px;
+	line-height: 48px;
+	padding-left: 8px;
+	img {
+		vertical-align: middle;
+		margin-right: 4px;
+	}
+	.difficulties {
+		position: absolute;
+		top: 5px;
+		right: 10px;
+		line-height: 37px;
+	}
+	.difficulty {
+		vertical-align: top;
+		display: inline-block;
+		height: 35px;
+		line-height: 35px;
+		font-weight: bold;
+		padding: 0 14px;
+		border: 1px solid #454443;
+		&.on {
+			background: #353433;
+			color: #e9e8e7;
+			text-shadow: 0 -1px 0 #090807;
+		}
+		&.off {
+			background: #151413;
+			color: #8b8685;
+		}
+		&:not(:first-child) {
+			border-left: 0;
+		}
+		&:first-child {
+			@include radius(4px, 0, 0, 4px);
+		}
+		&:last-child {
+			@include radius(0, 4px, 4px, 0);
+			&:first-child {
+				@include radius(4px, 4px, 4px, 4px);
+			}
+		}
+	}
+	.courselist & {
+		background: #090807;
+	}
+}
+
+.courselist {
+	&, .listbox-content {
+		background: #252423;
+	}
+}
+
+.courseitem {
+	color: #9b9695;
+	&.highlighted {
+		background: #353433;
+		color: #e9e8e7;
+	}
+	height: 48px;
+	line-height: 48px;
+	position: relative;
+	padding-left: 8px;
+	img {
+		vertical-align: middle;
+	}
+	.songs {
+		position: absolute;
+		top: 3px;
+		right: 8px;
+		img {
+			margin-left: -6px;
+			vertical-align: top;
+		}
+	}
+	.rank {
+		display: inline-block;
+		width: 40px;
+		color: #8b8685;
+		font-weight: bold;
+		padding-right: 6px;
+		text-align: right;
+	}
+}
+
+.back {
+	position: absolute;
+	top: 7px;
+	height: 30px;
+	line-height: 30px;
+	left: 8px;
+	padding: 0 6px;
+	background: #2D4878;
+	@include radius(4px, 4px, 4px, 4px);
+	border: 1px solid #3D62A4;
+	font-size: 0.9em;
+	&.tapping, &:hover {
+		background: #1d3868;
+	}
+}
+
+[data-tappable] {
+	cursor: pointer;
+}
+
+
+
+
