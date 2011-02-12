@@ -11,7 +11,7 @@ http://creativecommons.org/licenses/MIT/
 ###
 
 # has3d from iScroll.js
-has3d = ('WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix())
+has3d = `('WebKitCSSMatrix' in window && 'm11' in new WebKitCSSMatrix())`
 
 djmaxcrew_xpath = '//table[@width="960"]//table[@width="960"]//table[@width="960" and not(@height)]//table[@width="960"]//td[@width="725"]'
 djmaxcrew_base = 'http://djmaxcrew.com'

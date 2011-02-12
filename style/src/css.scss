@@ -75,7 +75,6 @@ html, body, #main, .viewport {
 	}
 	.panel-view {
 		position: relative;
-		display: inline;
 		white-space: nowrap;
 		-webkit-transform: translate3d(0,0,0);
 		-webkit-transition: 0.3s -webkit-transform, 0.3s left;
