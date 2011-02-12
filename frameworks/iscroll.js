@@ -388,14 +388,17 @@ iScroll.prototype = {
 	
 	touchEnd: function(e) {
 
-		if (!this.scrolling) {
-			return;
-		}
-
 		if (e.eventPhase == e.CAPTURING_PHASE) {
 
 			var that = this, snap
 				point = isTouch ? e.changedTouches[0] : e;
+
+			if (!that.scrolling) {
+				return;
+			}
+
+			that.scrolling = false;
+			that._wasScrolling = true;
 
 			if (!that.moved) {
 				that.resetPosition();
@@ -439,10 +442,14 @@ iScroll.prototype = {
 
 		} else {
 
-			e.preventDefault();
-			e.stopPropagation();
+			if (!this._wasScrolling) {
+				return;
+			}
 
-			this.scrolling = false;
+			this._wasScrolling = false;
+
+			e.preventDefault();
+			e.stopPropagation();			
 
 		}
 
